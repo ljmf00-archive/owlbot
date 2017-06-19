@@ -1,0 +1,32 @@
+language: node_js
+node_js:
+  - "0.12"
+  - "iojs"
+  - "4"
+  - "6"
+  - "7"
+  - "8"
+
+os:
+  - linux
+  - osx
+dist: trusty
+sudo: false
+
+matrix:
+  allow_failures:
+    - os: osx
+
+cache:
+  directories:
+    - "node_modules"
+
+install:
+  - node --version
+  - npm --version
+  - git --version
+  - npm install
+
+after_success:
+  - npm install -g codecov
+  - codecov

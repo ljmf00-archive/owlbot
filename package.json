@@ -1,0 +1,25 @@
+{
+  "name": "owl-bot",
+  "version": "0.0.5",
+  "description": "Another Discord Bot",
+  "readme": "README.md",
+  "author": "Luís 'ljmf00' Ferreira",
+  "license": "MIT",
+  "main": "src/app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ljmf00/owlbot.git"
+  },
+  "bin": {
+    "owlbot": "src/app.js"
+  },
+  "dependencies": {
+    "discord.js": "^11.1.0",
+    "erlpack": "^0.1.2",
+    "libsodium-wrappers": "^0.5.1",
+    "node-opus": "^0.2.6",
+    "uws": "^0.14.5",
+    "youtube-search": "^1.0.10",
+    "ytdl-core": "^0.14.4"
+  }
+}

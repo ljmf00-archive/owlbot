@@ -6,7 +6,7 @@
 <a href="https://travis-ci.org/ljmf00/owlbot"><img src="https://travis-ci.org/ljmf00/owlbot.svg" alt="Build Status"></a>
 <a href="https://www.npmjs.com/package/owl-bot"><img src="https://img.shields.io/npm/dt/owl-bot.svg" alt="Total Downloads"></a>
 <a href="https://www.npmjs.com/package/owl-bot"><img src="https://img.shields.io/npm/v/owl-bot.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat-square)" alt="License"></a>
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat-square)" alt="License"></a>
 </p>
 
 ## About OwlBot

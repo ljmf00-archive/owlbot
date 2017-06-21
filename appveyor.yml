@@ -3,6 +3,7 @@ init:
 
 
 image:
+  - Visual Studio 2013
   - Visual Studio 2015
   - Visual Studio 2017
 environment:
@@ -15,6 +16,8 @@ environment:
     - nodejs_version: "6"
     - nodejs_version: "7"
     - nodejs_version: "8"
+    - nodejs_version: "LTS"
+    - nodejs_version: "Stable"
 
 platform:
   - x86
@@ -42,6 +45,7 @@ matrix:
     - nodejs_version: 0.10
     - nodejs_version: 0.11
     - nodejs_version: 0.12
+    - configuration: Debug
 
 build: off
 cache:

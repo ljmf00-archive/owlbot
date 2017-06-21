@@ -20,7 +20,6 @@ sudo: false
 matrix:
   fast_finish: true
   allow_failures:
-    - os: osx
     - node_js: "iojs"
     - node_js: "0.10"
     - node_js: "0.11"

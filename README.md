@@ -4,6 +4,7 @@
 <p align="center"><a href="https://www.npmjs.com/package/owl-bot"><img src="https://nodei.co/npm/owl-bot.png?downloads=true&downloadRank=true"></a></p>
 <p align="center">
 <a href="https://travis-ci.org/ljmf00/owlbot"><img src="https://travis-ci.org/ljmf00/owlbot.svg" alt="Build Status"></a>
+<a href="https://ci.appveyor.com/project/ljmf00/owlbot/"><img src="https://ci.appveyor.com/api/projects/status/div2rjw6408heeil?svg=true" alt="Build Status: Windows"></a>
 <a href="https://www.npmjs.com/package/owl-bot"><img src="https://img.shields.io/npm/dt/owl-bot.svg" alt="Total Downloads"></a>
 <a href="https://www.npmjs.com/package/owl-bot"><img src="https://img.shields.io/npm/v/owl-bot.svg" alt="Latest Stable Version"></a>
 <a href="https://discord.gg/Jwp25Ta"><img src="https://img.shields.io/discord/270636444723183628.svg" alt="Discord Server"></a>

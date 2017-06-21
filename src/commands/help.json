@@ -1,5 +1,5 @@
 {
-	"category": ["general", "music", "voice", "misc"],
+	"category": ["general", "misc", "music", "voice"],
 	"command": {
 		"help": {
 			"category": "general",

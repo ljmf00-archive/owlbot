@@ -18,16 +18,18 @@ module.exports = {
 				else msg.guild.voiceConnection.disconnect();
 				break;
 			case 'help':
+        var msgtosend;
 				msg.reply("The command list was sent by direct message.");
-				msg.author.send("Commands list:\n`Usage: !owl <name> OR o!<name>`\nName:\tCategory:\tDescription:\n");
+				msgtosend = "Commands list:\n`Usage: !owl <name> OR o!<name>`\nName:\tCategory:\tDescription:\n\n";
 				const helpAsset = require("./commands/help.json");
 				for(var i = 0, len = helpAsset.category.length; i < len; i++) {
                     for (var j in helpAsset.command) {
                         if(helpAsset.category[i] === helpAsset.command[j].category) {
-							msg.author.send(`**${j}**\t${helpAsset.command[j].category}\t${helpAsset.command[j].description}`);
+							msgtosend += `**${j}**\t${helpAsset.command[j].category}\t${helpAsset.command[j].description}\n`;
 						}
                     }
 				}
+        msg.author.send(msgtosend);
 				break;
 			default:
 				msg.reply("Unknown command! Type `!owl help` or `o!help`");

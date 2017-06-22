@@ -1,0 +1,56 @@
+init:
+- git config --global core.autocrlf true
+
+
+image:
+  - Visual Studio 2013
+  - Visual Studio 2015
+  - Visual Studio 2017
+environment:
+  matrix:
+    - nodejs_version: "0.10"
+    - nodejs_version: "0.11"
+    - nodejs_version: "0.12"
+    - nodejs_version: "4"
+    - nodejs_version: "5"
+    - nodejs_version: "6"
+    - nodejs_version: "7"
+    - nodejs_version: "8"
+    - nodejs_version: "LTS"
+    - nodejs_version: "Stable"
+
+platform:
+  - x86
+  - x64
+  - Any CPU
+
+
+configuration:
+  - Debug
+  - Release
+
+install:
+  - ps: Install-Product node $env:nodejs_version $env:platform
+  - npm install
+
+test_script:
+  - node --version
+  - npm --version
+  - npm test
+
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - nodejs_version: 0.10
+    - nodejs_version: 0.11
+    - nodejs_version: 0.12
+    - configuration: Debug
+
+build:
+  parallel: true
+
+# build: off
+
+cache:
+  - node_modules -> package.json

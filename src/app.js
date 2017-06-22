@@ -11,7 +11,7 @@ bot.on('ready', () => {
 	package = require('../package.json');
 	console.log(`Starting ${package.name} ${package.version}...`);
 	bot.user.setStatus("online");
-	bot.user.setGame("!owl help")
+	bot.user.setGame("o!help | !owl help")
 	console.log("Logged in!");
 });
 

@@ -1,0 +1,29 @@
+{
+	"category": ["general", "music", "voice", "misc"],
+	"command": {
+		"help": {
+			"category": "general",
+			"description": "Get the commands list"
+		},
+		"play": {
+			"category": "music",
+			"description": "Play music from a query or URL stream"
+		},
+		"stop": {
+			"category": "music",
+			"description": "Stop playing current music (equal as leave)"
+		},
+		"leave": {
+			"category": "voice",
+			"description": "Leave from the current voice channel"
+		},
+		"join": {
+			"category": "voice",
+			"description": "Join to your current voice channel"
+		},
+		"roll": {
+			"category": "misc",
+			"description": "Roll a dice with a specific number range"
+		}
+	}
+}

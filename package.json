@@ -14,11 +14,14 @@
     "owlbot": "src/app.js"
   },
   "dependencies": {
+    "bufferutil": "^3.0.1",
+    "config": "^1.26.1",
+    "debug": "^2.6.8",
     "discord.js": "^11.1.0",
     "erlpack": "^0.1.2",
-    "libsodium-wrappers": "^0.5.1",
     "node-opus": "^0.2.6",
-    "uws": "^0.14.5",
+    "sodium": "^2.0.1",
+    "uws": "^8.14.0",
     "youtube-search": "^1.0.10",
     "ytdl-core": "^0.14.4"
   }

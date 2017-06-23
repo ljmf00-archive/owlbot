@@ -18,7 +18,7 @@ bot.on('ready', () => {
 		global.db.run("CREATE TABLE IF NOT EXISTS guild (id int, select_time DATETIME, select_options TEXT)");
 	});
 	bot.user.setStatus("online");
-	bot.user.setGame("!owl help");
+	bot.user.setGame("o!help | !owl help")
 	console.log("Logged in!");
 });
 

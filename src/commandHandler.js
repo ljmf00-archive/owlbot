@@ -1,17 +1,34 @@
 module.exports = {
-    handle: function(cmd, msg) {
-		//const args = cmd.rest.split(' ');
+    handle: function(cmd, msg, bot) {
+		if(cmd.rest == null) var args = null;
+        else var args = cmd.rest.split(' ');
 		switch(cmd.name) {
 			case 'play':
-				require("./commands/music/play.js").aiSearch(cmd.rest, msg)
-
+				if(cmd.rest == null) {
+                    msg.reply("You need to specify a query or a stream URL.");
+                } else require("./commands/music/play.js").aiSearch(cmd.rest, args, msg);
 				break;
+            case 'fplay':
+                if(cmd.rest == null) {
+                    msg.reply("You need to specify a query or a stream URL");
+                } else require("./commands/music/play.js").aiSearch(cmd.rest, args, msg, true);
+                break;
+            case 'ping':
+                msg.reply(`${bot.ping} ms`);
+                break;
 			case 'roll':
-				msg.reply("You rolled a D" + msg_content.substr(10, msg_content.length - 10) + " and you got a " + (Math.floor(Math.random() * (Number(msg_content.substr(10, msg_content.length - 10)))) + 1));
+				if(args == null ) msg.reply(`You rolled a D6 and you got a ${(Math.floor(Math.random() * 6) + 1)}`);
+                else msg.reply(`You rolled a D${args[0]} and you got a ${(Math.floor(Math.random() * (Number(args[0]))) + 1)}`);
 				break;
 			case 'join':
 				msg.member.voiceChannel.join();
 				break;
+            case 'invite':
+                bot.generateInvite(11328)
+                  .then(link => {
+                    msg.reply(`Generated bot invite link: ${link}`);
+                });
+                break;
 			case 'stop':
 			case 'leave':
 				if(!msg.guild.voiceConnection) msg.reply("I'm not connected to a voice channel!");

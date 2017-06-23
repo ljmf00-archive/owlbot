@@ -1,5 +1,5 @@
 {
-	"category": ["general", "misc", "music", "voice"],
+	"category": ["diagnostic", "general", "misc", "music", "voice"],
 	"command": {
 		"help": {
 			"category": "general",
@@ -8,6 +8,14 @@
 		"play": {
 			"category": "music",
 			"description": "Play music from a query or URL stream"
+		},
+		"ping":  {
+			"category": "diagnostic",
+			"description": "Display the average heartbeat of the bot"
+		},
+		"invite": {
+			"category": "general",
+			"description": "Print the invite code with right permissions for a new guild bot integration"
 		},
 		"stop": {
 			"category": "music",

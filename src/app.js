@@ -15,7 +15,7 @@ bot.on('ready', () => {
 	console.log(`Starting ${package.name} ${package.version}...`);
 	global.db = new sqlite3.Database('./guild.db', ()=> {
 		console.log("Check/Create DB tables...");
-		global.db.run("CREATE TABLE IF NOT EXISTS guild (id int, select_time DATETIME, select_options TEXT)");
+		global.db.run("CREATE TABLE IF NOT EXISTS guild (ID integer PRIMARY KEY AUTOINCREMENT, guild_id int, select_options TEXT)");
 	});
 	bot.user.setStatus("online");
 	bot.user.setGame("o!help | !owl help")

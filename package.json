@@ -5,6 +5,10 @@
   "readme": "README.md",
   "author": "Luís 'ljmf00' Ferreira",
   "license": "MIT",
+  "keywords": [
+    "discord",
+    "bot"
+  ],
   "main": "src/app.js",
   "repository": {
     "type": "git",

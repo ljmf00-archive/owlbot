@@ -22,16 +22,22 @@ $ npm install -g owl-bot
 ```
 
 ### Usage
+- Firstly you need to rename `config_sample.json` to `config.json` and include the API token for Discord Bot and Apps integrations.
+- Now you just need to run the following command:
 ```sh
-$ owlbot DISCORD_TOKEN
+$ owlbot
 ```
 
 ### Commands
   - `!owl help` - List of general commands
-  - `!owl roll <NUMBER>` - Roll a dice
-  - `!owl play <URL>` - Stream music for the current voice channel
+  - `!owl roll (NUMBER)` - Roll a dice
+  - `!owl ping` - Return the bot heartbeat
+  - `!owl invite` - Print the invite code with right permissions for a new guild bot integration
+  - `!owl fplay <query>` - Fast search on youtube and stream it on the current voice channel
+  - `!owl play <URL> OR <query>` - Stream music for the current voice channel
   - `!owl join` - Make bot move or join into your current voice channel
   - `!owl leave` - Leave bot from a voice channel
+  - `!owl stop` - Leave bot from a voice channel (same as `leave`)
 
 ## License
 Licensed under the MIT License

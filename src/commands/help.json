@@ -9,6 +9,10 @@
 			"category": "music",
 			"description": "Play music from a query or URL stream"
 		},
+		"fplay": {
+			"category": "music",
+			"description": "Fast search on youtube and stream it on the current voice channel"
+		},
 		"ping":  {
 			"category": "diagnostic",
 			"description": "Display the average heartbeat of the bot"

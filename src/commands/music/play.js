@@ -1,6 +1,6 @@
 const ytdl = require('ytdl-core');
 const ytsearch = require('youtube-search');
-const config = require('../../../config.json');
+//const config = require('../../../config.json');
 var global = require('../../global.js');
 
 module.exports = {
@@ -9,7 +9,7 @@ module.exports = {
 			var stream = ytdl(arg[0], { filter : 'audioonly' });
 		}
 		else {
-			ytsearch(args, {maxResults: 10, key: config.YOUTUBE_DATA_API_KEY}, function(err, result) {
+			ytsearch(args, {maxResults: 10, key: process.env.YOUTUBE_DATA_API_KEY}, function(err, result) {
   				if(err) {
 					msg.react("❌");
 					return console.log(err);

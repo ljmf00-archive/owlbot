@@ -2,7 +2,7 @@
  ///Required modules
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-const config = require('../config.json');
+//const config = require('../config.json');
 const sqlite3 = require('sqlite3').verbose();
 var global = require('./global.js');
 
@@ -82,4 +82,4 @@ bot.on('message', msg => {
 
 process.on('unhandledRejection', console.error);
 
-bot.login(config.DISCORD_TOKEN);
+bot.login(process.env.DISCORD_TOKEN);

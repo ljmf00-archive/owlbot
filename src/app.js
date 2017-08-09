@@ -2,7 +2,6 @@
  ///Required modules
 const Discord = require('discord.js');
 var express = require('express');
-var onion = require('onionservice');
 
 //const config = require('../config.json');
 const { Client } = require('pg');

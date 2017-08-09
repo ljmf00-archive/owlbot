@@ -2,9 +2,13 @@
  ///Required modules
 const Discord = require('discord.js');
 var express = require('express');
+var onion = require('onionservice');
+
 //const config = require('../config.json');
 const { Client } = require('pg');
 var global = require('./global.js');
+
+const tor = require('granax')();
 
 global.bot = new Discord.Client();
 global.webapp = express();
@@ -54,34 +58,45 @@ global.bot.on('ready', () => {
 
         global.webapp.get('/api', function(req, res) {
             res.set('Content-Type', 'text/plain');
+            res.send("Coming soon!");
         });
 
         global.webapp.listen(global.webapp.get('port'), function() {
             console.log(global.notice(`Node app is running on port ${global.webapp.get('port')}`));
+            console.log(global.notice(`Starting a tor web instance on same web instance port: ${global.webapp.get('port')}...`));
 
-            global.bot.user.setStatus("online");
-    		global.bot.user.setGame("o!help | !owl help")
-    		console.log(global.notice("Logged in into Discord!"));
-    		process.stdout.write("> ");
-    		rl.on('line', (input) => {
-    			if(input != "") {
-    				if(input.indexOf(" ", 0) !== -1) {
-    					var cmd = input.substr(0, input.indexOf(" ", 0));
-    					var content = input.substr(input.indexOf(" ", 0)+1, input.length);
-    				} else {
-    					var cmd = input;
-    					var content = null;
-    				}
-    				require("./commandHandler.js").rlHandle(input, cmd, content);
-    			}
-    			process.stdout.write("> ");
-    		});
+            tor.on('ready', function() {
+                tor.createHiddenService(`127.0.0.1:${global.webapp.get('port')}`, (err, result) => {
+                    console.log(global.notice(`Service is running on following tor URL: ${result.serviceId}.onion`));
+              });
+            });
+        });
+
+        global.bot.user.setStatus("online");
+        global.bot.user.setGame("o!help | !owl help")
+        console.log(global.notice("Logged in into Discord!"));
+        rl.on('line', (input) => {
+            if(input != "") {
+                if(input.indexOf(" ", 0) !== -1) {
+                    var cmd = input.substr(0, input.indexOf(" ", 0));
+                    var content = input.substr(input.indexOf(" ", 0)+1, input.length);
+                } else {
+                    var cmd = input;
+                    var content = null;
+                }
+                require("./commandHandler.js").rlHandle(input, cmd, content);
+            }
+            process.stdout.write("> ");
         });
 	});
 });
 
 rl.on('SIGINT', () => {
   process.exit(130);
+});
+
+tor.on('error', function(err) {
+  console.error(err);
 });
 
 global.bot.on('disconnect', () => {

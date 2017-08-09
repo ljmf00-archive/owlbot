@@ -68,6 +68,7 @@ module.exports = {
             case 'exit':
                 console.log(global.notice("Stopping the bot..."));
                 global.bot.destroy();
+                break;
             case 'version':
                 console.log(`${package.name} ${package.version}`);
                 break;

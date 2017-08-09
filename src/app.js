@@ -1,31 +1,97 @@
 #!/usr/bin/env node
  ///Required modules
 const Discord = require('discord.js');
-const bot = new Discord.Client();
+var express = require('express');
 //const config = require('../config.json');
-const sqlite3 = require('sqlite3').verbose();
+const { Client } = require('pg');
 var global = require('./global.js');
+
+global.bot = new Discord.Client();
+global.webapp = express();
+
+var colors = require("colors");
+var clc = require("cli-color");
+global.error = function error(msg) {return clc.bold.red("E: ") + msg.red}
+global.warn = function warn(msg) {return clc.bold.yellow("WARN: ") + msg.yellow}
+global.notice = function notice(msg) {return clc.bold.cyan("INFO: ") + msg.cyan}
+
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
 ///Process Title
 process.title = "owlbot";
 
 ///Initial bot callback (bootstrap)
-bot.on('ready', () => {
+global.bot.on('ready', () => {
 	package = require('../package.json');
 	console.log(`Starting ${package.name} ${package.version}...`);
-	global.db = new sqlite3.Database('./guild.db', ()=> {
-		console.log("Check/Create DB tables...");
-		global.db.run("CREATE TABLE IF NOT EXISTS guild (ID integer PRIMARY KEY AUTOINCREMENT, guild_id int, select_options TEXT)");
+	console.log(global.notice("Connecting to database..."));
+	global.db = new Client();
+	global.db.connect();
+
+	console.log(global.notice("Check/Create DB tables..."));
+	global.db.query("CREATE TABLE IF NOT EXISTS guild (ID integer PRIMARY KEY, guild_id int, select_options TEXT)", (err, res) => {
+		if(err) {
+			console.log(global.error(err.stack));
+			process.exit(1);
+		}
+        console.log(global.notice("Connected to database!"));
+
+        console.log(global.notice(`Starting a web instance on port ${(process.env.PORT || 5000)}...`));
+        global.webapp.set('port', (process.env.PORT || 5000));
+        global.webapp.use(express.static(__dirname + '/public'));
+        // views is directory for all template files
+        global.webapp.set('views', __dirname + '/web/views');
+        global.webapp.set('view engine', 'ejs');
+
+        global.webapp.get('/', function(req, res) {
+            res.render('pages/index');
+        });
+
+        global.webapp.get('/api', function(req, res) {
+            res.set('Content-Type', 'text/plain');
+        });
+
+        global.webapp.listen(global.webapp.get('port'), function() {
+            console.log(global.notice(`Node app is running on port ${global.webapp.get('port')}`));
+
+            global.bot.user.setStatus("online");
+    		global.bot.user.setGame("o!help | !owl help")
+    		console.log(global.notice("Logged in into Discord!"));
+    		process.stdout.write("> ");
+    		rl.on('line', (input) => {
+    			if(input != "") {
+    				if(input.indexOf(" ", 0) !== -1) {
+    					var cmd = input.substr(0, input.indexOf(" ", 0));
+    					var content = input.substr(input.indexOf(" ", 0)+1, input.length);
+    				} else {
+    					var cmd = input;
+    					var content = null;
+    				}
+    				require("./commandHandler.js").rlHandle(input, cmd, content);
+    			}
+    			process.stdout.write("> ");
+    		});
+        });
 	});
-	bot.user.setStatus("online");
-	bot.user.setGame("o!help | !owl help")
-	console.log("Logged in!");
+});
+
+rl.on('SIGINT', () => {
+  process.exit(130);
+});
+
+global.bot.on('disconnect', () => {
+	global.db.end();
 });
 
 /*     This callback will always be triggered when a message is sent on
  * a server (guilt) or even to the DM (Direct Message)
  */
-bot.on('message', msg => {
+global.bot.on('message', msg => {
 	try {
 		//Parse the command
 		const msg_content = msg.content.toString();
@@ -82,4 +148,4 @@ bot.on('message', msg => {
 
 process.on('unhandledRejection', console.error);
 
-bot.login(process.env.DISCORD_TOKEN);
+global.bot.login(process.env.DISCORD_TOKEN);

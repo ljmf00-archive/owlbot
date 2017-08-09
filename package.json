@@ -18,12 +18,18 @@
     "owlbot": "src/app.js"
   },
   "dependencies": {
+    "async": "^2.5.0",
     "bufferutil": "^3.0.1",
+    "cli-color": "^1.2.0",
+    "colors": "^1.1.2",
     "config": "^1.26.1",
     "debug": "^2.6.8",
     "discord.js": "^11.1.0",
+    "ejs": "^2.5.7",
     "erlpack": "^0.1.2",
+    "express": "^4.15.4",
     "node-opus": "^0.2.6",
+    "pg": "^7.1.0",
     "sodium": "^2.0.1",
     "sqlite3": "^3.1.8",
     "uws": "^8.14.0",

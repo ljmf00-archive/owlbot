@@ -1,41 +1,46 @@
 {
-	"category": ["diagnostic", "general", "misc", "music", "voice"],
-	"command": {
-		"help": {
-			"category": "general",
-			"description": "Get the commands list"
-		},
-		"play": {
-			"category": "music",
-			"description": "Play music from a query or URL stream"
-		},
-		"fplay": {
-			"category": "music",
-			"description": "Fast search on youtube and stream it on the current voice channel"
-		},
-		"ping":  {
-			"category": "diagnostic",
-			"description": "Display the average heartbeat of the bot"
-		},
-		"invite": {
-			"category": "general",
-			"description": "Print the invite code with right permissions for a new guild bot integration"
-		},
-		"stop": {
-			"category": "music",
-			"description": "Stop playing current music (equal as leave)"
-		},
-		"leave": {
-			"category": "voice",
-			"description": "Leave from the current voice channel"
-		},
-		"join": {
-			"category": "voice",
-			"description": "Join to your current voice channel"
-		},
-		"roll": {
-			"category": "misc",
-			"description": "Roll a dice with a specific number range"
+	"message": {
+		"category": ["diagnostic", "general", "misc", "music", "voice"],
+		"command": {
+			"help": {
+				"category": "general",
+				"description": "Get the commands list"
+			},
+			"play": {
+				"category": "music",
+				"description": "Play music from a query or URL stream"
+			},
+			"fplay": {
+				"category": "music",
+				"description": "Fast search on youtube and stream it on the current voice channel"
+			},
+			"ping":  {
+				"category": "diagnostic",
+				"description": "Display the average heartbeat of the bot"
+			},
+			"invite": {
+				"category": "general",
+				"description": "Print the invite code with right permissions for a new guild bot integration"
+			},
+			"stop": {
+				"category": "music",
+				"description": "Stop playing current music (equal as leave)"
+			},
+			"leave": {
+				"category": "voice",
+				"description": "Leave from the current voice channel"
+			},
+			"join": {
+				"category": "voice",
+				"description": "Join to your current voice channel"
+			},
+			"roll": {
+				"category": "misc",
+				"description": "Roll a dice with a specific number range"
+			}
 		}
+	},
+	"readline": {
+		
 	}
 }

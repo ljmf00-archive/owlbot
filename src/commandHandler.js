@@ -42,10 +42,10 @@ module.exports = {
 				msg.reply("The command list was sent by direct message.");
 				msgtosend = "Commands list:\n`Usage: !owl <name> OR o!<name>`\nName:\tCategory:\tDescription:\n\n";
 				const helpAsset = require("./commands/help.json");
-				for(var i = 0, len = helpAsset.category.length; i < len; i++) {
-                    for (var j in helpAsset.command) {
-                        if(helpAsset.category[i] === helpAsset.command[j].category) {
-							msgtosend += `**${j}**\t${helpAsset.command[j].category}\t${helpAsset.command[j].description}\n`;
+				for(var i = 0, len = helpAsset.message.category.length; i < len; i++) {
+                    for (var j in helpAsset.message.command) {
+                        if(helpAsset.message.category[i] === helpAsset.message.command[j].category) {
+							msgtosend += `**${j}**\t${helpAsset.message.command[j].category}\t${helpAsset.message.command[j].description}\n`;
 						}
                     }
 				}
@@ -54,5 +54,25 @@ module.exports = {
 			default:
 				msg.reply("Unknown command! Type `!owl help` or `o!help`");
 		}
+    },
+    rlHandle: function(input, cmd, content) {
+        var global = require('./global.js');
+        if(content == null) var args = null;
+        else var args = content.split(' ');
+        switch(cmd) {
+            case 'help':
+                console.log("  exit\tStop bot and exit from process");
+                console.log("  help\tDisplay the command list.");
+                console.log("  version\tPrint the version of the bot");
+                break;
+            case 'exit':
+                console.log(global.notice("Stopping the bot..."));
+                global.bot.destroy();
+            case 'version':
+                console.log(`${package.name} ${package.version}`);
+                break;
+            default:
+                console.log(global.error("Unknown command! Type 'help'"));
+        }
     }
 };

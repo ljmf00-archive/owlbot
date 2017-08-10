@@ -66,6 +66,7 @@ global.bot.on('ready', () => {
 
             tor.on('ready', function() {
                 tor.createHiddenService(`127.0.0.1:${global.webapp.get('port')}`, (err, result) => {
+                    if(err) console.log(error(err));
                     console.log(global.notice(`Service is running on following tor URL: ${result.serviceId}.onion`));
               });
             });

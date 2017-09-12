@@ -37,7 +37,7 @@ global.bot.on('ready', () => {
 	global.db.connect();
 
 	console.log(global.notice("Check/Create DB tables..."));
-	global.db.query("CREATE TABLE IF NOT EXISTS guild (ID integer PRIMARY KEY, guild_id int, select_options TEXT)", (err, res) => {
+	global.db.query("CREATE TABLE IF NOT EXISTS guild (ID integer PRIMARY KEY, guild_id bigint NOT NULL, select_options TEXT NOT NULL)", (err, res) => {
 		if(err) {
 			console.log(global.error(err.stack));
 			process.exit(1);
@@ -65,7 +65,17 @@ global.bot.on('ready', () => {
             console.log(global.notice(`Starting a tor web instance on same web instance port: ${global.webapp.get('port')}...`));
 
             tor.on('ready', function() {
-                tor.createHiddenService(`127.0.0.1:${global.webapp.get('port')}`, (err, result) => {
+                tor.createHiddenService(`127.0.0.1:${global.webapp.get('port')}`, {
+                    clientName: null,
+                    clientBlob: null,
+                    virtualPort: 80,
+                    keyType:"RSA1024",
+                    keyBlob: process.env.TOR_KEYBLOB,
+                    discardPrivateKey: false,
+                    detach: false,
+                    basicAuth: false,
+                    nonAnonymous: false
+                }, (err, result) => {
                     if(err) console.log(error(err));
                     console.log(global.notice(`Service is running on following tor URL: ${result.serviceId}.onion`));
               });
@@ -153,7 +163,7 @@ global.bot.on('message', msg => {
 			}
 
 			//Command Handler function
-			require("./commandHandler.js").handle(cmd, msg, bot);
+			require("./commandHandler.js").handle(cmd, msg);
 		}
 	} catch(err) {
 		msg.react("❌");

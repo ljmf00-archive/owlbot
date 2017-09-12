@@ -1,5 +1,6 @@
 module.exports = {
-    handle: function(cmd, msg, bot) {
+    handle: function(cmd, msg) {
+        var global = require('./global.js');
 		if(cmd.rest == null) var args = null;
         else var args = cmd.rest.split(' ');
 		switch(cmd.name) {
@@ -14,7 +15,7 @@ module.exports = {
                 } else require("./commands/music/play.js").aiSearch(cmd.rest, args, msg, true);
                 break;
             case 'ping':
-                msg.reply(`${bot.ping} ms`);
+                msg.reply(`${global.bot.ping} ms`);
                 break;
 			case 'roll':
 				if(args == null ) msg.reply(`You rolled a D6 and you got a ${(Math.floor(Math.random() * 6) + 1)}`);
@@ -27,7 +28,7 @@ module.exports = {
 				msg.member.voiceChannel.join();
 				break;
             case 'invite':
-                bot.generateInvite(11328)
+                global.bot.generateInvite(11328)
                   .then(link => {
                     msg.reply(`Generated bot invite link: ${link}`);
                 });

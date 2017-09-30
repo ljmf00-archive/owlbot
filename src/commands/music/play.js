@@ -33,7 +33,7 @@ module.exports = {
 						text: 'INSERT INTO guild (guild_id, select_options) VALUES ($1, $2) ON CONFLICT(guild_id) DO UPDATE SET guild_id = $1, select_options = $2',
 						values: [msg.guild.id, ret_jlist],
 						rowMode: 'array'
-					}, );
+					});
 					ret_msg+= "\nTo select a music type **o!select** ***<number>***";
 				}
 				msg.channel.send(ret_msg);

@@ -37,7 +37,7 @@ global.bot.on('ready', () => {
 	global.db.connect();
 
 	console.log(global.notice("Check/Create DB tables..."));
-	global.db.query("CREATE TABLE IF NOT EXISTS guild (ID bigint PRIMARY KEY, guild_id bigint NOT NULL, select_options TEXT NOT NULL)", (err, res) => {
+	global.db.query("CREATE TABLE IF NOT EXISTS guild (ID serial PRIMARY KEY, guild_id bigint NOT NULL UNIQUE, select_options TEXT NOT NULL)", (err, res) => {
 		if(err) {
 			console.log(global.error(err.stack));
 			process.exit(1);

@@ -30,7 +30,7 @@ module.exports = {
 				} else {
 					var ret_jlist = JSON.stringify(ret_list);
 					global.db.query({
-						text: 'INSERT INTO guild (guild_id, select_options) VALUES ($1, $2) ON CONFLICT(guild_id) DO UPDATE SET guild_id = $1, select_options = $2',
+						text: 'INSERT INTO guild (guild_id, select_options) VALUES ($1, $2) ON CONFLICT(guild_id) DO UPDATE SET select_options = $2',
 						values: [msg.guild.id, ret_jlist],
 						rowMode: 'array'
 					});

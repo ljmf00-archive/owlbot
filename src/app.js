@@ -42,62 +42,62 @@ global.bot.on('ready', () => {
 			console.log(global.error(err.stack));
 			process.exit(1);
 		}
-        console.log(global.notice("Connected to database!"));
+		console.log(global.notice("Connected to database!"));
 
-        console.log(global.notice(`Starting a web instance on port ${(process.env.PORT || 5000)}...`));
-        global.webapp.set('port', (process.env.PORT || 5000));
-        global.webapp.use(express.static(__dirname + '/public'));
-        // views is directory for all template files
-        global.webapp.set('views', __dirname + '/web/views');
-        global.webapp.set('view engine', 'ejs');
+		console.log(global.notice(`Starting a web instance on port ${(process.env.PORT || 5000)}...`));
+		global.webapp.set('port', (process.env.PORT || 5000));
+		global.webapp.use(express.static(__dirname + '/public'));
+		// views is directory for all template files
+		global.webapp.set('views', __dirname + '/web/views');
+		global.webapp.set('view engine', 'ejs');
 
-        global.webapp.get('/', function(req, res) {
-            res.render('pages/index');
-        });
+		global.webapp.get('/', function(req, res) {
+			res.render('pages/index');
+		});
 
-        global.webapp.get('/api', function(req, res) {
-            res.set('Content-Type', 'text/plain');
-            res.send("Coming soon!");
-        });
+		global.webapp.get('/api', function(req, res) {
+			res.set('Content-Type', 'text/plain');
+			res.send("Coming soon!");
+		});
 
-        global.webapp.listen(global.webapp.get('port'), function() {
-            console.log(global.notice(`Node app is running on port ${global.webapp.get('port')}`));
-            console.log(global.notice(`Starting a tor web instance on same web instance port: ${global.webapp.get('port')}...`));
+		global.webapp.listen(global.webapp.get('port'), function() {
+			console.log(global.notice(`Node app is running on port ${global.webapp.get('port')}`));
+			console.log(global.notice(`Starting a tor web instance on same web instance port: ${global.webapp.get('port')}...`));
 
-            tor.on('ready', function() {
-                tor.createHiddenService(`127.0.0.1:${global.webapp.get('port')}`, {
-                    clientName: null,
-                    clientBlob: null,
-                    virtualPort: 80,
-                    keyType:"RSA1024",
-                    keyBlob: process.env.TOR_KEYBLOB,
-                    discardPrivateKey: false,
-                    detach: false,
-                    basicAuth: false,
-                    nonAnonymous: false
-                }, (err, result) => {
-                    if(err) console.log(error(err));
-                    console.log(global.notice(`Service is running on following tor URL: ${result.serviceId}.onion`));
-              });
-            });
-        });
+			tor.on('ready', function() {
+				tor.createHiddenService(`127.0.0.1:${global.webapp.get('port')}`, {
+					clientName: null,
+					clientBlob: null,
+					virtualPort: 80,
+					keyType:"RSA1024",
+					keyBlob: process.env.TOR_KEYBLOB,
+					discardPrivateKey: false,
+					detach: false,
+					basicAuth: false,
+					nonAnonymous: false
+				}, (err, result) => {
+					if(err) console.log(error(err));
+					console.log(global.notice(`Service is running on following tor URL: ${result.serviceId}.onion`));
+			  });
+			});
+		});
 
-        global.bot.user.setStatus("online");
-        global.bot.user.setGame("o!help | !owl help")
-        console.log(global.notice("Logged in into Discord!"));
-        rl.on('line', (input) => {
-            if(input != "") {
-                if(input.indexOf(" ", 0) !== -1) {
-                    var cmd = input.substr(0, input.indexOf(" ", 0));
-                    var content = input.substr(input.indexOf(" ", 0)+1, input.length);
-                } else {
-                    var cmd = input;
-                    var content = null;
-                }
-                require("./commandHandler.js").rlHandle(input, cmd, content);
-            }
-            process.stdout.write("> ");
-        });
+		global.bot.user.setStatus("online");
+		global.bot.user.setGame("o!help | !owl help")
+		console.log(global.notice("Logged in into Discord!"));
+		rl.on('line', (input) => {
+			if(input != "") {
+				if(input.indexOf(" ", 0) !== -1) {
+					var cmd = input.substr(0, input.indexOf(" ", 0));
+					var content = input.substr(input.indexOf(" ", 0)+1, input.length);
+				} else {
+					var cmd = input;
+					var content = null;
+				}
+				require("./commandHandler.js").rlHandle(input, cmd, content);
+			}
+			process.stdout.write("> ");
+		});
 	});
 });
 
@@ -140,8 +140,8 @@ global.bot.on('message', msg => {
 					prefix: 'o!'
 				};
 			} else {
-	            var count = 0;
-	            var pos = msg_content.indexOf(' ');
+				var count = 0;
+				var pos = msg_content.indexOf(' ');
 				while (pos !== -1) {
 					count++;
 					pos = msg_content.indexOf(' ', pos + 1);

@@ -61,17 +61,16 @@ module.exports = {
 			if(arg == null) msg.reply("Please specify the track number!");
 			else {
 				var track_num = Number(arg[0]);
-				if(isNaN(track_num)) return msg.reply("Invalid track number!");
+				if(isNaN(track_num) || track_num > 10) return msg.reply("Invalid track number!");
 				global.db.query({
-					text: "SELECT select_options FROM guild WHERE guild_id = ?",
-					values: msg.guild.id,
-					rowMode: 'array'
-				}, function(err, res){
-					if(typeof res.rows === 'undefined') {
+					text: "SELECT guild_id, select_options FROM guild WHERE guild_id = $1",
+					values: [msg.guild.id]
+				}, function (err, res) {
+					if(typeof res === 'undefined') {
 						msg.reply("You have nothing to select.");
 					} else {
-						var ret_links = JSON.parse(row.select_options);
-						var stream = ytdl(ret_links[track_num-1], { filter : 'audioonly' });
+						var ret_links = JSON.parse(res.rows[0].select_options);
+						var stream = ytdl(ret_links[track_num-1].link, { filter : 'audioonly' });
 						if(!msg.member.voiceChannel) return msg.reply("You need to be connected to a voice channel!");
 						msg.member.voiceChannel.join();
 						const dispatcher = msg.member.voiceChannel.connection.playStream(stream, { seek: 0, volume: 1 });

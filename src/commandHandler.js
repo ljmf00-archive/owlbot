@@ -10,11 +10,13 @@ module.exports = {
 			case 'uptime':
 				msg.reply(`${(global.bot.uptime / 1000 / 60 / 60) | 0} h`);	
 				break;
+			case 'p.':
 			case 'play':
 				if(cmd.rest == null) {
 					msg.reply("You need to specify a query or a stream URL.");
 				} else require("./commands/music/play.js").aiSearch(cmd.rest, args, msg);
 				break;
+			case 'fp.':
 			case 'fplay':
 				if(cmd.rest == null) {
 					msg.reply("You need to specify a query or a stream URL");
@@ -29,9 +31,11 @@ module.exports = {
 				else if (args == 0) msg.reply("you can't roll nothing (0)");
 				else msg.reply(`You rolled a D${args[0]} and you got a ${(Math.floor(Math.random() * (Number(args[0]))) + 1)}`);
 				break;
+			case '!s.':
 			case 'select':
 				require("./commands/music/play.js").musicSelect(args, msg);
 				break;
+			case '!J.':
 			case 'join':
 				msg.member.voiceChannel.join();
 				break;
@@ -41,7 +45,9 @@ module.exports = {
 					msg.reply(`Generated bot invite link: ${link}`);
 				});
 				break;
+			case '!st.':
 			case 'stop':
+			case '!le.':
 			case 'leave':
 				if(!msg.guild.voiceConnection) msg.reply("I'm not connected to a voice channel!");
 				else msg.guild.voiceConnection.disconnect();

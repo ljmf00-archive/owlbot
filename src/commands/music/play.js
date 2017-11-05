@@ -1,6 +1,5 @@
 const ytdl = require('ytdl-core');
 const ytsearch = require('youtube-search');
-//const config = require('../../../config.json');
 var global = require('../../global.js');
 
 module.exports = {

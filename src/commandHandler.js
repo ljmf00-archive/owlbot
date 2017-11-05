@@ -25,6 +25,7 @@ module.exports = {
 				break;
 			case 'roll':
 				if(args == null ) msg.reply(`You rolled a D6 and you got a ${(Math.floor(Math.random() * 6) + 1)}`);
+				else if (isNaN(args)) msg.reply("please roll a number");
 				else msg.reply(`You rolled a D${args[0]} and you got a ${(Math.floor(Math.random() * (Number(args[0]))) + 1)}`);
 				break;
 			case 'select':
